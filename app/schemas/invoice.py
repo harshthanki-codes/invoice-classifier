@@ -30,7 +30,7 @@ class PredictResponse(BaseModel):
 
 class HealthResponse(BaseModel):
     status: str
-    model_loaded: bool
+    is_model_loaded: bool
     version: str
 
 

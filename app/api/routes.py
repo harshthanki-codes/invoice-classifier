@@ -13,10 +13,10 @@ router = APIRouter()
 @router.get("/health", response_model=HealthResponse, tags=["System"])
 async def health_check():
     return HealthResponse(
-        status="ok",
-        model_loaded=InvoiceClassifier._pipeline is not None,
-        version="1.0.0",
-    )
+    status="ok",
+    is_model_loaded=InvoiceClassifier._pipeline is not None,
+    version="1.0.0",
+)
 
 
 @router.post(

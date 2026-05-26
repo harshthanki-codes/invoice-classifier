@@ -105,7 +105,7 @@ class TestAPI:
         assert resp.status_code == 200
         body = resp.json()
         assert body["status"] == "ok"
-        assert body["model_loaded"] is True
+        assert body["is_model_loaded"] is True
 
     def test_predict_valid_request(self, client):
         resp = client.post("/api/v1/predict", json={"text": "AWS monthly cloud hosting bill"})
