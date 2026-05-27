@@ -1,13 +1,12 @@
 version: "3.9"
-
 services:
   classifier:
     build: .
     ports:
       - "8000:8000"
     volumes:
-      - ./models:/app/models   # persist trained model outside container
-      - ./data:/app/data       # mount custom training data
+      - ./models:/app/models
+      - ./data:/app/data
     environment:
       - PYTHONUNBUFFERED=1
     restart: unless-stopped

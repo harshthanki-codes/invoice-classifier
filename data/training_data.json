@@ -1,82 +1,937 @@
 [
-  {"text": "Blue Dart courier charges for warehouse delivery", "category": "Logistics"},
-  {"text": "FedEx express shipping invoice for client documents", "category": "Logistics"},
-  {"text": "DHL international freight charges Q2", "category": "Logistics"},
-  {"text": "Delhivery last-mile delivery charges", "category": "Logistics"},
-  {"text": "DTDC parcel service charges for regional distribution", "category": "Logistics"},
-  {"text": "Warehousing and storage charges for inventory handling", "category": "Logistics"},
-  {"text": "UPS ground shipping for product returns", "category": "Logistics"},
-  {"text": "Freight forwarding charges for import shipment", "category": "Logistics"},
-  {"text": "Customs clearance and port handling fees", "category": "Logistics"},
-  {"text": "Last mile delivery charges for ecommerce fulfillment", "category": "Logistics"},
-  {"text": "Cold chain logistics for pharmaceutical delivery", "category": "Logistics"},
-  {"text": "Courier partner integration and delivery charges", "category": "Logistics"},
-
-  {"text": "HP printer cartridges and toner refill order", "category": "Office Supplies"},
-  {"text": "A4 paper reams bulk purchase for office printing", "category": "Office Supplies"},
-  {"text": "Stapler, punching machine, and stationery items", "category": "Office Supplies"},
-  {"text": "Whiteboard markers and flip chart paper", "category": "Office Supplies"},
-  {"text": "Office desk organizer and filing cabinet accessories", "category": "Office Supplies"},
-  {"text": "Ballpoint pens and spiral notebooks bulk order", "category": "Office Supplies"},
-  {"text": "Sticky notes, paper clips, and binder clips purchase", "category": "Office Supplies"},
-  {"text": "Office cleaning supplies and sanitizer restock", "category": "Office Supplies"},
-  {"text": "Lamination pouches and binding accessories", "category": "Office Supplies"},
-  {"text": "Envelopes, stamps, and mailing supplies", "category": "Office Supplies"},
-  {"text": "Ergonomic mouse pad and wrist rest for office", "category": "Office Supplies"},
-  {"text": "Notebook and pen set for employee onboarding kits", "category": "Office Supplies"},
-
-  {"text": "AWS monthly cloud hosting bill", "category": "Cloud/Software"},
-  {"text": "Google Cloud Platform compute engine invoice", "category": "Cloud/Software"},
-  {"text": "Microsoft Azure reserved instance charges", "category": "Cloud/Software"},
-  {"text": "GitHub Enterprise annual subscription renewal", "category": "Cloud/Software"},
-  {"text": "Jira Software and Confluence Cloud license", "category": "Cloud/Software"},
-  {"text": "Slack Business Plus subscription invoice", "category": "Cloud/Software"},
-  {"text": "Figma Organization annual plan renewal", "category": "Cloud/Software"},
-  {"text": "Datadog APM and infrastructure monitoring subscription", "category": "Cloud/Software"},
-  {"text": "Snowflake data warehouse usage charges", "category": "Cloud/Software"},
-  {"text": "MongoDB Atlas cluster charges for production database", "category": "Cloud/Software"},
-  {"text": "Twilio SMS and WhatsApp messaging API charges", "category": "Cloud/Software"},
-  {"text": "Adobe Creative Cloud team license annual renewal", "category": "Cloud/Software"},
-  {"text": "Vercel Pro deployment and hosting subscription", "category": "Cloud/Software"},
-  {"text": "OpenAI API usage charges for the month", "category": "Cloud/Software"},
-  {"text": "Postman API platform enterprise license", "category": "Cloud/Software"},
-
-  {"text": "BESCOM electricity bill for office premises", "category": "Utilities"},
-  {"text": "Airtel broadband and leased line monthly charges", "category": "Utilities"},
-  {"text": "BWSSB water supply charges for commercial building", "category": "Utilities"},
-  {"text": "Jio fiber business internet connection bill", "category": "Utilities"},
-  {"text": "Tata Power electricity consumption invoice", "category": "Utilities"},
-  {"text": "ACT Fibernet enterprise broadband monthly bill", "category": "Utilities"},
-  {"text": "Municipal corporation property tax quarterly payment", "category": "Utilities"},
-  {"text": "Generator fuel and maintenance charges for office", "category": "Utilities"},
-  {"text": "Piped natural gas supply charges for cafeteria", "category": "Utilities"},
-  {"text": "UPS battery backup maintenance and electricity charges", "category": "Utilities"},
-  {"text": "Solar panel maintenance and net metering charges", "category": "Utilities"},
-  {"text": "Office telephone landline bill BSNL", "category": "Utilities"},
-
-  {"text": "IndiGo flight tickets for sales team conference Bangalore to Delhi", "category": "Travel"},
-  {"text": "Ola Business cab charges for employee airport transfers", "category": "Travel"},
-  {"text": "Taj Hotel accommodation for client meeting Hyderabad", "category": "Travel"},
-  {"text": "IRCTC train tickets for field team travel", "category": "Travel"},
-  {"text": "Makemytrip corporate travel booking charges", "category": "Travel"},
-  {"text": "Uber for Business monthly employee commute reimbursement", "category": "Travel"},
-  {"text": "Passport and visa processing fees for international conference", "category": "Travel"},
-  {"text": "Travel insurance premium for team offsite", "category": "Travel"},
-  {"text": "Air Asia flight booking for trade fair Mumbai", "category": "Travel"},
-  {"text": "Holiday Inn hotel stay for project deployment team", "category": "Travel"},
-  {"text": "Meru cab service monthly corporate account charges", "category": "Travel"},
-  {"text": "Foreign exchange and forex card loading charges for business trip", "category": "Travel"},
-
-  {"text": "Raw material procurement for production batch Q3", "category": "Inventory"},
-  {"text": "Electronic components purchase for hardware assembly", "category": "Inventory"},
-  {"text": "Steel and aluminium stock replenishment order", "category": "Inventory"},
-  {"text": "Packaging material bulk purchase - boxes and bubble wrap", "category": "Inventory"},
-  {"text": "Finished goods import from supplier for retail distribution", "category": "Inventory"},
-  {"text": "Pharmaceutical ingredients and API procurement", "category": "Inventory"},
-  {"text": "Spare parts inventory for machine maintenance", "category": "Inventory"},
-  {"text": "FMCG product stock for regional warehouse", "category": "Inventory"},
-  {"text": "Semiconductor chips and PCB components purchase", "category": "Inventory"},
-  {"text": "Fabric and textile raw material for garment production", "category": "Inventory"},
-  {"text": "Safety equipment and PPE kit stock for factory", "category": "Inventory"},
-  {"text": "Agricultural inputs including seeds fertilizer and pesticide", "category": "Inventory"}
+  {
+    "text": "Blue Dart courier charges for warehouse delivery",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "FedEx express shipping invoice for client documents",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "DHL international freight charges Q2",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Delhivery last-mile delivery charges",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "DTDC parcel service charges for regional distribution",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Warehousing and storage charges for inventory handling",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "UPS ground shipping for product returns",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Freight forwarding charges for import shipment",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Customs clearance and port handling fees",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Last mile delivery charges for ecommerce fulfillment",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Cold chain logistics for pharmaceutical delivery",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Courier partner integration and delivery charges",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Ekart logistics charges for flipkart fulfillment",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Shadowfax delivery partner charges monthly invoice",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Xpressbees courier charges for SME deliveries",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Porter local delivery and logistics charges",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Shiprocket platform charges and courier fees",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Gati cargo transport charges for bulk shipment",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Amazon logistics third party shipping invoice",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Road transport charges for goods delivery Mumbai to Delhi",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Packing and forwarding charges for export order",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Warehouse rent and loading unloading charges",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Interstate truck freight for raw material transport",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Rail cargo charges for bulk consignment",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Delivery charges for last mile consumer goods",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Hyperlocal delivery partner charges for dark store",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Return logistics charges for reverse pickup",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Cross dock facility charges for retail distribution",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Air freight charges for urgent client shipment",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Container shipping charges for overseas import",
+    "category": "Logistics",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "HP printer cartridges and toner refill order",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "A4 paper reams bulk purchase for office printing",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Stapler punching machine and stationery items",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Whiteboard markers and flip chart paper",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Office desk organizer and filing cabinet accessories",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Ballpoint pens and spiral notebooks bulk order",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Sticky notes paper clips and binder clips purchase",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Lamination pouches and binding accessories",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Envelopes stamps and mailing supplies",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Ergonomic mouse pad and wrist rest for office",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Notebook and pen set for employee onboarding kits",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Classmate notebooks and geometry box office purchase",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Faber Castell pens and markers bulk stationery",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Canon printer ink cartridge replacement order",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Epson ink refill for office printer quarterly",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Office chair cushion and back support accessories",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Whiteboard and marker stand for conference room",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Visitor register and attendance book purchase",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Rubber bands binder twine and office packing material",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Scissors tape dispenser and glue sticks office supply",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "File folders and document organizers purchase",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Printed letterhead and business card stock order",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Paper shredder purchase for document security",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Office cleaning supplies sanitizer and tissue boxes",
+    "category": "Office Supplies",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Fevicol adhesive and stationery repair supplies",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Post-it notes and index tabs for documentation",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Projector screen and laser pointer for presentations",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "HDMI cable and USB hub for office workstation",
+    "category": "Office Supplies",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Coffee and tea stationery for client meetings",
+    "category": "Office Supplies",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Office furniture polish and cleaning kit",
+    "category": "Office Supplies",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "AWS monthly cloud hosting bill",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Google Cloud Platform compute engine invoice",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Microsoft Azure reserved instance charges",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "GitHub Enterprise annual subscription renewal",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Jira Software and Confluence Cloud license",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Slack Business Plus subscription invoice",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Figma Organization annual plan renewal",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Datadog APM and infrastructure monitoring subscription",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Snowflake data warehouse usage charges",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "MongoDB Atlas cluster charges for production database",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Twilio SMS and WhatsApp messaging API charges",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Adobe Creative Cloud team license annual renewal",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Vercel Pro deployment and hosting subscription",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "OpenAI API usage charges for the month",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Postman API platform enterprise license",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Razorpay payment gateway monthly charges and MDR",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Zoho CRM enterprise subscription annual invoice",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Freshdesk customer support platform monthly bill",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Tally Prime annual license renewal for accounting",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Busy accounting software license renewal",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "GST filing software subscription annual charges",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "ClearTax pro plan subscription for GST compliance",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Instamojo payment link and storefront monthly charges",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Shopify India plan subscription for ecommerce store",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "WhatsApp Business API charges via Meta",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Notion team workspace annual subscription",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Linear project management tool subscription",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Sentry error monitoring pro plan monthly",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "DigitalOcean droplet and managed database charges",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Cloudflare Pro plan and Workers usage charges",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Mixpanel analytics platform team plan monthly",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Intercom customer messaging platform subscription",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Microsoft 365 Business Standard license monthly",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Google Workspace Business Plus annual invoice",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Stripe payment processing monthly invoice",
+    "category": "Cloud/Software",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "BESCOM electricity bill for office premises",
+    "category": "Utilities",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Airtel broadband and leased line monthly charges",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "BWSSB water supply charges for commercial building",
+    "category": "Utilities",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Jio fiber business internet connection bill",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Tata Power electricity consumption invoice",
+    "category": "Utilities",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "ACT Fibernet enterprise broadband monthly bill",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Municipal corporation property tax quarterly payment",
+    "category": "Utilities",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Generator fuel and maintenance charges for office",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Piped natural gas supply charges for cafeteria",
+    "category": "Utilities",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Solar panel maintenance and net metering charges",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Office telephone landline bill BSNL",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "MSEDCL electricity bill for factory premises",
+    "category": "Utilities",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "TNEB power supply monthly invoice commercial",
+    "category": "Utilities",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "CESC electricity bill for West Bengal office",
+    "category": "Utilities",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Vi Vodafone corporate postpaid mobile bills",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Airtel corporate SIM plan monthly invoice",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "BSNL broadband and telephone quarterly charges",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Water tanker supply charges for office building",
+    "category": "Utilities",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "UPS battery replacement and AMC charges",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Air conditioner AMC and servicing charges office",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Diesel fuel for office generator monthly",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Internet leased line charges ILL annual renewal",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Tata Communications MPLS link monthly charges",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "HPCL LPG commercial cylinder charges",
+    "category": "Utilities",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "PGCIL power transmission charges commercial",
+    "category": "Utilities",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Sewage treatment and effluent disposal charges",
+    "category": "Utilities",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Fire safety equipment AMC annual charges",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Elevator maintenance AMC for office building",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Security agency charges for office premises",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Pest control service charges quarterly office",
+    "category": "Utilities",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "IndiGo flight tickets for sales team conference Bangalore to Delhi",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Ola Business cab charges for employee airport transfers",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Taj Hotel accommodation for client meeting Hyderabad",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "IRCTC train tickets for field team travel",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Makemytrip corporate travel booking charges",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Uber for Business monthly employee commute reimbursement",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Passport and visa processing fees for international conference",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Air Asia flight booking for trade fair Mumbai",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Holiday Inn hotel stay for project deployment team",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Meru cab service monthly corporate account charges",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Foreign exchange and forex card loading charges for business trip",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Vistara business class upgrade for client visit",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "SpiceJet flight tickets quarterly team offsite",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Air India domestic flight booking for management review",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "GoAir airline tickets for regional team meeting",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Rapido bike taxi charges for field executive daily",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Yatra.com hotel and flight combo booking",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "OYO Rooms accommodation for outstation team",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Treebo hotel stay for project site visit",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "FabHotels corporate accommodation invoice",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Swiggy Dineout business meal for client entertainment",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Petrol reimbursement for field sales team monthly",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Auto rickshaw and local transport reimbursement",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Metro card recharge for employee daily commute",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Conference registration fee and travel for summit",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Business visa charges for Singapore client visit",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Travel insurance premium for international trip",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Roaming charges for employee international business travel",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Luggage allowance and excess baggage charges",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Airport lounge access charges for frequent flyer program",
+    "category": "Travel",
+    "gst_itc": "not_eligible"
+  },
+  {
+    "text": "Raw material procurement for production batch Q3",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Electronic components purchase for hardware assembly",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Steel and aluminium stock replenishment order",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Packaging material bulk purchase boxes and bubble wrap",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Finished goods import from supplier for retail distribution",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Pharmaceutical ingredients and API procurement",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Spare parts inventory for machine maintenance",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "FMCG product stock for regional warehouse",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Semiconductor chips and PCB components purchase",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Fabric and textile raw material for garment production",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Safety equipment and PPE kit stock for factory",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Agricultural inputs seeds fertilizer and pesticide",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Polypropylene granules purchase for plastic manufacturing",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Cotton yarn procurement for weaving unit",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Chemical raw material for paint manufacturing",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Corrugated box and carton stock for packing department",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "HDPE pipes and fittings for infrastructure project",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Brass fittings and copper wire purchase for electrical",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Food grade packaging material for FMCG products",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Trading stock purchase from wholesale market",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Electronic accessories mobile covers and chargers stock",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Printing ink and paper stock for publishing house",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Wood and plywood raw material for furniture manufacturing",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Cement and construction material purchase for project",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Rubber gaskets and seals for industrial equipment",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Glass sheets and optical components for lens manufacturing",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Resale goods purchase from authorized distributor",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Bulk grocery stock purchase for restaurant chain",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Auto spare parts inventory for workshop",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Medical devices and diagnostic kits procurement",
+    "category": "Inventory",
+    "gst_itc": "eligible"
+  },
+  {
+    "text": "Unique invoice for feedback test XYZ",
+    "category": "Logistics",
+    "gst_itc": "unknown"
+  },
+  {
+    "text": "Unique invoice for feedback test XYZ",
+    "category": "Logistics",
+    "gst_itc": "unknown"
+  }
 ]

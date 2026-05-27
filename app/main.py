@@ -1,21 +1,22 @@
 """
-Invoice Expense Classifier — FastAPI application.
+Invoice Expense Classifier — FastAPI application entry point.
 
-Startup loads (or trains) the ML model once. All prediction requests are stateless
-and synchronous — no async DB calls, so sync handlers are fine here.
+Startup trains or loads the model once before accepting traffic.
+All prediction handlers are CPU-bound and synchronous — no async
+I/O, so there's no benefit to async route handlers here.
 """
 
 import logging
 import sys
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from app.api.routes import router
 from app.ml.classifier import InvoiceClassifier
 
-# Structured logging to stdout — plays well with Docker and log aggregators
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
@@ -27,24 +28,38 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Load the ML model before the server starts accepting traffic."""
-    logger.info("Starting Invoice Classifier API — loading model...")
+    logger.info("Invoice Classifier API starting — loading model...")
     InvoiceClassifier.load()
-    logger.info("Model ready. API is live.")
+    logger.info("Model ready. Serving traffic.")
     yield
     logger.info("Shutting down.")
 
 
 app = FastAPI(
     title="Invoice Expense Classifier",
-    description=(
-        "ML-powered API that classifies free-text invoice descriptions "
-        "into structured expense categories. Built with TF-IDF + Logistic Regression."
-    ),
-    version="1.0.0",
+    description="""
+## Invoice Expense Classifier API
+
+ML-powered REST API that classifies free-text invoice descriptions into
+structured expense categories — purpose-built for GST compliance workflows.
+
+### Features
+- **6 expense categories** aligned to Indian SMB accounting
+- **Calibrated confidence scores** with a human-review flag below 0.72
+- **GST/ITC guidance** per prediction — maps to CGST Act Section 17(5)
+- **Feedback loop** — correct predictions feed the next retrain automatically
+- **Hot reload** — retrain and redeploy without restarting the server
+
+### Categories
+`Logistics` · `Office Supplies` · `Cloud/Software` · `Utilities` · `Travel` · `Inventory`
+""",
+    version="2.0.0",
     lifespan=lifespan,
-    docs_url="/docs",
-    redoc_url="/redoc",
+    contact={
+        "name": "API Support",
+        "url": "https://github.com/your-username/invoice-classifier",
+    },
+    license_info={"name": "MIT"},
 )
 
 app.add_middleware(
@@ -54,9 +69,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    logger.exception("Unhandled exception on %s %s", request.method, request.url)
+    return JSONResponse(status_code=500, content={"detail": "Internal server error."})
+
+
 app.include_router(router, prefix="/api/v1")
 
 
 @app.get("/", include_in_schema=False)
 async def root():
-    return {"message": "Invoice Classifier API v1.0.0 — see /docs for usage."}
+    return {
+        "service": "Invoice Expense Classifier",
+        "version": "2.0.0",
+        "docs": "/docs",
+        "health": "/api/v1/health",
+    }

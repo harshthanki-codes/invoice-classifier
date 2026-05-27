@@ -1,62 +1,132 @@
-# Invoice Expense Classifier
+<div align="center">
 
-A production-ready REST API that classifies free-text invoice descriptions into structured expense categories using a TF-IDF + Logistic Regression pipeline.
+# 🧾 Invoice Expense Classifier
+
+**Production-ready ML API for automated invoice expense categorisation**  
+Built for GST-compliant finance workflows in Indian SMBs
+
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi)](https://fastapi.tiangolo.com)
+[![Tests](https://img.shields.io/badge/tests-62%20passed-brightgreen?logo=pytest)](tests/)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Live Demo](https://img.shields.io/badge/demo-live%20on%20Render-46E3B7?logo=render)](https://invoice-classifier-h3kj.onrender.com)
+
+[**Live API**](https://invoice-classifier-h3kj.onrender.com/docs) · [**Docs**](#api-reference) · [**Quickstart**](#quickstart)
+
+</div>
 
 ---
 
 ## Overview
 
-Finance and ERP systems frequently receive unstructured invoice text from vendors. Manually routing these to the correct GL account or expense category is time-consuming and error-prone. This service automates that classification with a lightweight ML model that runs with zero inference cost, starts in under a second, and returns predictions with calibrated confidence scores.
+Finance and ERP systems routinely receive unstructured invoice text from vendors. Manually routing these to the correct GL account or GST expense category is slow and error-prone. This service automates that classification with a lightweight ML model that:
 
-**Supported Categories**
-
-| Category | Example Invoice Text |
-|---|---|
-| Logistics | "Blue Dart courier charges for warehouse delivery" |
-| Cloud/Software | "AWS monthly cloud hosting bill" |
-| Office Supplies | "HP printer cartridges and toner refill" |
-| Utilities | "BESCOM electricity bill for office premises" |
-| Travel | "IndiGo flight tickets for sales team, Bangalore to Delhi" |
-| Inventory | "Raw material procurement for production batch Q3" |
+- Returns predictions in **< 5ms** with zero GPU dependency
+- Includes **calibrated confidence scores** and a human-review flag for low-certainty predictions
+- Maps every prediction to **GST/ITC eligibility** under the CGST Act — so downstream systems can auto-populate input tax credit fields without a second lookup
+- Exposes a **feedback endpoint** that lets users correct wrong predictions, feeding a continuous improvement loop
 
 ---
 
 ## Architecture
 
-```mermaid
-graph TD
-    Client -->|POST /api/v1/predict| FastAPI
-    FastAPI --> Validator[Pydantic Validator]
-    Validator --> Classifier[InvoiceClassifier]
-    Classifier --> Pipeline[TF-IDF + Logistic Regression]
-    Pipeline --> Response[category + confidence + scores]
-    Response --> Client
+```
+POST /api/v1/predict
+        │
+        ▼
+┌─────────────────────┐
+│  Pydantic Validator │  ← rejects blank, too-short, too-long text
+└────────┬────────────┘
+         │
+         ▼
+┌─────────────────────┐
+│  TF-IDF Vectoriser  │  ← unigrams + bigrams + trigrams, 6000 features
+│  (sublinear_tf)     │    sublinear TF dampens high-frequency boilerplate
+└────────┬────────────┘
+         │
+         ▼
+┌─────────────────────┐
+│ Logistic Regression │  ← C=8, balanced class weights, lbfgs solver
+│  (multinomial)      │    predict_proba → calibrated confidence scores
+└────────┬────────────┘
+         │
+         ▼
+┌─────────────────────────────────────────────────────┐
+│  Response                                           │
+│  category · confidence · review_recommended · gst  │
+└─────────────────────────────────────────────────────┘
 ```
 
 **Why TF-IDF + Logistic Regression?**
 
-For short, domain-specific text with a fixed label set, this combination outperforms Naive Bayes and matches transformer-based models at a fraction of the cost. It trains in milliseconds, needs no GPU, and is fully explainable — important when the model feeds financial systems.
+For short, domain-specific text with a fixed label set, this combination outperforms Naive Bayes and matches fine-tuned transformers at a fraction of operational cost. Key advantages for a fintech context:
+
+| Property | TF-IDF + LR | BERT/Transformer |
+|---|---|---|
+| Inference latency | ~1ms | 200–500ms |
+| GPU required | No | Recommended |
+| Explainability | Full (feature weights) | Limited |
+| Cold start | ~200ms | 8–15s |
+| Cost | $0 | GPU instance |
+
+The decision reverses if the label taxonomy grows beyond ~20 categories or if semantic understanding of ambiguous text becomes critical.
+
+---
+
+## Model Performance
+
+> All metrics from 5-fold stratified cross-validation on 185 labelled Indian invoice samples.
+
+**CV F1-macro: `0.8213 ± 0.0386`**
+
+| Category | Precision | Recall | F1 | Support |
+|---|---|---|---|---|
+| Cloud/Software | 0.84 | 0.89 | **0.86** | 35 |
+| Travel | 0.89 | 0.83 | **0.86** | 30 |
+| Inventory | 0.81 | 0.87 | **0.84** | 30 |
+| Logistics | 0.77 | 0.90 | **0.83** | 30 |
+| Office Supplies | 0.85 | 0.73 | **0.79** | 30 |
+| Utilities | 0.81 | 0.73 | **0.77** | 30 |
+
+**Confidence threshold: `0.72`** — predictions below this return `review_recommended: true`. Empirically, sub-threshold predictions have a ~3× higher error rate. In production, route these to a human review queue rather than auto-approving them.
+
+> To reach F1 > 0.90, add 100+ diverse samples per category and retrain via `POST /api/v1/train`.
+
+---
+
+## GST / ITC Alignment
+
+Every prediction includes GST treatment guidance derived from the CGST Act:
+
+| Category | ITC Eligible | Statutory Basis |
+|---|---|---|
+| Logistics | ✅ Yes | SAC 9965 — forward charge mechanism |
+| Cloud/Software | ✅ Yes | SAC 9983 — IT services |
+| Office Supplies | ✅ Yes | HSN 4820/8443 (food/beverages blocked) |
+| Inventory | ✅ Yes | HSN varies by commodity |
+| Utilities | ⚠️ Partial | Electricity exempt; telecom/internet eligible |
+| Travel | ❌ No | Blocked — CGST Act Section 17(5)(b) |
 
 ---
 
 ## Quickstart
 
-### Local (Python)
+### Local (Python 3.10+)
 
 ```bash
-# 1. Clone and install
 git clone https://github.com/your-username/invoice-classifier
 cd invoice-classifier
+
 pip install -r requirements.txt
 
-# 2. Train the model
+# Train the model
 python scripts/train.py
 
-# 3. Start the API
-uvicorn app.main:app --reload
+# Start the API
+uvicorn app.main:app --reload --port 8000
 ```
 
-API is live at `http://localhost:8000`. Interactive docs at `http://localhost:8000/docs`.
+Interactive docs: **http://localhost:8000/docs**
 
 ### Docker
 
@@ -65,7 +135,7 @@ docker build -t invoice-classifier .
 docker run -p 8000:8000 invoice-classifier
 ```
 
-Or with Docker Compose:
+### Docker Compose
 
 ```bash
 docker-compose up --build
@@ -77,34 +147,81 @@ docker-compose up --build
 
 ### `POST /api/v1/predict`
 
-Classify an invoice or expense description.
+Classify an invoice description.
 
 **Request**
 ```json
-{
-  "text": "AWS monthly cloud hosting bill"
-}
+{ "text": "AWS monthly cloud hosting bill" }
 ```
 
 **Response**
 ```json
 {
   "category": "Cloud/Software",
-  "confidence": 0.8741,
+  "confidence": 0.9134,
+  "review_recommended": false,
   "scores": {
-    "Cloud/Software": 0.8741,
-    "Utilities": 0.0523,
-    "Office Supplies": 0.0312,
-    "Logistics": 0.0214,
-    "Travel": 0.0131,
-    "Inventory": 0.0079
+    "Cloud/Software": 0.9134,
+    "Utilities": 0.0421,
+    "Office Supplies": 0.0198,
+    "Logistics": 0.0142,
+    "Travel": 0.0071,
+    "Inventory": 0.0034
+  },
+  "gst": {
+    "itc_eligible": true,
+    "hsn_sac_hint": "SAC 9983 — Information Technology Services",
+    "note": "ITC fully available on SaaS, cloud, and software subscriptions"
   }
 }
 ```
 
-**Validation Rules**
-- `text` is required, must be 3–1000 characters, cannot be blank/whitespace
-- Returns `422 Unprocessable Entity` if validation fails
+---
+
+### `POST /api/v1/feedback`
+
+Submit a correction to improve future model versions.
+
+```json
+{
+  "text": "Swiggy Dineout client entertainment bill",
+  "correct_category": "Travel"
+}
+```
+
+Response:
+```json
+{
+  "message": "Correction recorded. Run /train to apply.",
+  "recorded_text": "Swiggy Dineout client entertainment bill",
+  "correct_category": "Travel",
+  "total_training_samples": 186
+}
+```
+
+---
+
+### `POST /api/v1/train`
+
+Retrain on current data (including any feedback corrections) and hot-reload.
+
+```json
+{
+  "message": "Model retrained and hot-reloaded.",
+  "cv_f1_mean": 0.8213,
+  "cv_f1_std": 0.0386,
+  "classes": ["Cloud/Software","Inventory","Logistics","Office Supplies","Travel","Utilities"],
+  "num_samples": 185,
+  "confidence_threshold": 0.72,
+  "production_ready": false
+}
+```
+
+---
+
+### `GET /api/v1/evaluate`
+
+Fetch metrics from last training run without retraining.
 
 ---
 
@@ -114,40 +231,32 @@ Classify an invoice or expense description.
 {
   "status": "ok",
   "model_loaded": true,
-  "version": "1.0.0"
+  "version": "2.0.0",
+  "confidence_threshold": 0.72
 }
 ```
 
 ---
 
-### `POST /api/v1/train`
+## More API Examples
 
-Retrain the model on updated data at `data/training_data.json`. Reloads the model in-process after training.
+```bash
+# Predict
+curl -X POST https://invoice-classifier-h3kj.onrender.com/api/v1/predict \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Jio fiber business internet connection bill"}'
 
-```json
-{
-  "message": "Model retrained and reloaded successfully.",
-  "cv_f1_mean": 0.6795,
-  "cv_f1_std": 0.0212,
-  "classes": ["Cloud/Software", "Inventory", "Logistics", "Office Supplies", "Travel", "Utilities"],
-  "num_samples": 75
-}
+# Submit feedback
+curl -X POST https://invoice-classifier-h3kj.onrender.com/api/v1/feedback \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Team dinner at client office", "correct_category": "Travel"}'
+
+# Retrain after collecting feedback
+curl -X POST https://invoice-classifier-h3kj.onrender.com/api/v1/train
+
+# Check model health
+curl https://invoice-classifier-h3kj.onrender.com/api/v1/health
 ```
-
----
-
-## Training Data Format
-
-`data/training_data.json` — a JSON array of labeled examples:
-
-```json
-[
-  {"text": "Blue Dart courier charges for warehouse delivery", "category": "Logistics"},
-  {"text": "AWS monthly cloud hosting bill", "category": "Cloud/Software"}
-]
-```
-
-Add more samples to improve accuracy. Each category should have at least 10–15 diverse examples.
 
 ---
 
@@ -155,9 +264,10 @@ Add more samples to improve accuracy. Each category should have at least 10–15
 
 ```bash
 pytest tests/ -v
+# 62 passed in ~8s
 ```
 
-The test suite covers preprocessing, model accuracy, API contract, schema validation, and edge cases (25 tests).
+Covers: preprocessing · category accuracy (19 fixtures) · response schema · confidence thresholds · GST metadata · API contract · input validation · feedback loop · edge cases (Hindi-English mixed, all-caps, numeric-heavy, unicode).
 
 ---
 
@@ -166,19 +276,22 @@ The test suite covers preprocessing, model accuracy, API contract, schema valida
 ```
 invoice-classifier/
 ├── app/
-│   ├── api/routes.py         # FastAPI route handlers
-│   ├── ml/classifier.py      # TF-IDF + LR pipeline, train/predict logic
-│   ├── schemas/invoice.py    # Pydantic request/response models
-│   └── main.py               # App factory, lifespan, middleware
+│   ├── api/routes.py          # /predict /feedback /train /evaluate /health
+│   ├── ml/classifier.py       # TF-IDF + LR pipeline, GST profiles, feedback loop
+│   ├── schemas/invoice.py     # Pydantic v2 request/response contracts
+│   └── main.py                # App factory, lifespan, global error handler
 ├── data/
-│   └── training_data.json    # Labeled training samples
-├── models/                   # Persisted model artifacts (git-ignored)
+│   └── training_data.json     # 185 labelled Indian invoice samples with GST tags
+├── reports/
+│   └── evaluation.md          # Auto-generated per-class F1 + confusion matrix
+├── models/                    # Persisted artifacts (git-ignored)
 ├── scripts/
-│   └── train.py              # CLI training script
+│   ├── train.py               # CLI training with CV metrics
+│   └── evaluate.py            # Per-class F1 + markdown report generator
 ├── tests/
-│   └── test_classifier.py    # Full test suite
-├── .github/workflows/ci.yml  # GitHub Actions CI
-├── Dockerfile
+│   └── test_classifier.py     # 62 tests across 7 test classes
+├── .github/workflows/ci.yml   # GitHub Actions — test + docker smoke test
+├── Dockerfile                 # Multi-stage, non-root, pre-trained at build time
 ├── docker-compose.yml
 └── requirements.txt
 ```
@@ -187,31 +300,28 @@ invoice-classifier/
 
 ## Deployment
 
-The container is self-contained — the model is trained at image build time, so startup is instant.
+The container pre-trains the model at image build time — startup is instant.
 
-**Railway / Render / Fly.io (free tiers)**
-```bash
-# Set start command to:
-uvicorn app.main:app --host 0.0.0.0 --port $PORT
-```
+**Render (live)**
+Set start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
 
-**Environment Variables**
-No required environment variables for base operation. Extend `app/main.py` to read `LOG_LEVEL`, `WORKERS`, etc. from environment as needed.
+**Fly.io / Railway**
+Both support Dockerfile deployments directly. No additional config needed.
+
+**Scaling note:** The model is loaded in-process. For multi-worker deployments (`--workers 4`), the model is loaded once per worker process — ~2MB per worker, negligible.
 
 ---
 
-## Extending the Model
+## Roadmap
 
-To add a new category (e.g., "HR & Recruitment"):
-
-1. Add labeled examples to `data/training_data.json`
-2. Retrain: `python scripts/train.py` or `POST /api/v1/train`
-3. No code changes required
-
-To swap the ML backend (e.g., to a transformer), replace the `build_pipeline()` function in `app/ml/classifier.py` while keeping the `predict()` interface intact. The API layer is fully decoupled from the model implementation.
+- [ ] HSN/SAC code prediction alongside category
+- [ ] Vendor entity extraction (NER) for structured output
+- [ ] Confidence threshold tuning endpoint
+- [ ] Webhook support for async prediction results
+- [ ] Multi-language invoice support (Hindi, Tamil, Gujarati)
 
 ---
 
 ## License
 
-MIT
+MIT — use freely, contribute back.
